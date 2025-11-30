@@ -1,0 +1,63 @@
+import java.util.Random;
+
+public class GeradorMegaSena {
+    public static void main(String[] args) {
+
+        Random generate = new Random();
+
+        System.out.println("Gerador da Mega Sena com 2 números quentes!");
+
+        //Números que caem bastante
+        int hot1 = 5;
+        int hot2 = 10;
+        int hot3 = 34;
+        int hot4 = 37;
+        int hot5 = 53;
+
+        //Escolher o primeiro número
+        int opcao1 = generate.nextInt(5);
+        int numeroQuente1 = 0;
+           
+        //Verifica qual número o numeroQuente1 escolheu   
+        if (opcao1 == 0) numeroQuente1 = hot1;
+        else if (opcao1 == 1) numeroQuente1 = hot2;
+        else if (opcao1 == 2) numeroQuente1 = hot3;
+        else if (opcao1 == 3) numeroQuente1 = hot4;
+        else numeroQuente1 = hot5;
+
+        //Escolher o segundo número quente,mas que seja diferente do primeiro
+        int numeroQuente2 = numeroQuente1;
+
+        //Se o segundo número quente foi igual o primeiro, gera novamente até escolher outro número
+        while (numeroQuente2 == numeroQuente1) {
+            int opcao2 = generate.nextInt(5);
+
+            if (opcao2 == 0) numeroQuente2 = hot1;
+            else if (opcao2 == 1) numeroQuente2 = hot2;
+            else if (opcao2 == 2) numeroQuente2 = hot3;
+            else if (opcao2 == 3) numeroQuente2 = hot4;
+            else numeroQuente2 = hot5;
+        }
+
+        System.out.println("Os números quentes garantidos são: " + numeroQuente1 + ", " + numeroQuente2);
+        System.out.println("-----------------------------------");
+
+        int i = 0;
+            
+        //Agora gera os próximos 4 números que faltam    
+        while (i < 6) {
+            int numero;
+            
+            if (i == 0) {
+                numero = numeroQuente1; //Primeiro número escolhido
+            } else if (i == 1) {
+                numero = numeroQuente2; //Segundo número escolhido
+            } else {
+                numero = generate.nextInt(60) + 1; //Gera outros 4 números aleatórios
+            }
+
+            System.out.println(numero);
+            i++;
+        }
+    }
+}
